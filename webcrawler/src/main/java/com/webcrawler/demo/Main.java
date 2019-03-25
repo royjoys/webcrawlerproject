@@ -25,7 +25,7 @@ public class Main {
 				ex.submit(task);
 			}
 		} catch (WebCrawlerException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		} finally {
 			ex.shutdown();
 			while (!ex.isTerminated()) {

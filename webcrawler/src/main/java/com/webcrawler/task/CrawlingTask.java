@@ -28,7 +28,7 @@ public class CrawlingTask implements Callable<String> {
 			Internet internet = service.readObjectFromJSON(file);
 			process(file, internet.getPages());
 		} catch(WebCrawlerException e ){
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 			throw new WebCrawlerException(e.getMessage());
 		}
 		return "Success";
