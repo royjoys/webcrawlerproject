@@ -6,13 +6,14 @@ import java.util.concurrent.Executors;
 
 import com.webcrawler.exception.WebCrawlerException;
 import com.webcrawler.task.CrawlingTask;
+import com.webcrawler.util.WebCrawlerUtil;
 
 public class Main {
 
 	public static void main(String[] args) {
 		ExecutorService ex = null;
 		try {
-			File folder = new File("C:\\testcases");
+			File folder = new File(WebCrawlerUtil.getProperties("web-crawler.input"));
 			File[] files = folder.listFiles();
 			ex = Executors.newFixedThreadPool(5);
 			for (File file : files) {
