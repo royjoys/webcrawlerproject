@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import org.apache.log4j.Logger;
+
 import com.webcrawler.exception.WebCrawlerException;
 import com.webcrawler.model.Internet;
 import com.webcrawler.model.Page;
@@ -11,6 +13,7 @@ import com.webcrawler.service.WebCrawlerService;
 import com.webcrawler.service.impl.WebCrawlerServiceImpl;
 
 public class CrawlingTask implements Callable<String> {
+	final static Logger logger = Logger.getLogger(CrawlingTask.class);
 
 	File file;
 
@@ -42,7 +45,7 @@ public class CrawlingTask implements Callable<String> {
 				jsonInString = "empty";
 			}
 			
-			System.out.println("The output for " + f.getName() + " is \n"
+			logger.info("The output for " + f.getName() + " is \n"
 					+ jsonInString);
 		} catch (WebCrawlerException e) {
 			throw new WebCrawlerException(e.getMessage());

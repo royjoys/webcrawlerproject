@@ -4,13 +4,17 @@ import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.apache.log4j.Logger;
+
 import com.webcrawler.exception.WebCrawlerException;
 import com.webcrawler.task.CrawlingTask;
 import com.webcrawler.util.WebCrawlerUtil;
 
 public class Main {
 
+	final static Logger logger = Logger.getLogger(Main.class);
 	public static void main(String[] args) {
+		logger.info("test");
 		ExecutorService ex = null;
 		try {
 			File folder = new File(WebCrawlerUtil.getProperties("web-crawler.input"));
