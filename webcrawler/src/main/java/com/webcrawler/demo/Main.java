@@ -15,13 +15,13 @@ public class Main {
 		try {
 			File folder = new File(WebCrawlerUtil.getProperties("web-crawler.input"));
 			File[] files = folder.listFiles();
-			ex = Executors.newFixedThreadPool(5);
+			ex = Executors.newFixedThreadPool(Integer.parseInt(WebCrawlerUtil.getProperties("web-crawler.noOfThreads")));
 			for (File file : files) {
 				CrawlingTask task = new CrawlingTask(file);
 				ex.submit(task);
 			}
 		} catch (WebCrawlerException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		} finally {
 			ex.shutdown();
 			while (!ex.isTerminated()) {

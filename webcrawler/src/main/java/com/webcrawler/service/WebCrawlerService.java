@@ -9,6 +9,10 @@ import com.webcrawler.model.Internet;
 import com.webcrawler.model.Output;
 import com.webcrawler.model.Page;
 
+/**
+ * @author Soumik.Roy
+ *
+ */
 public interface WebCrawlerService {
 
 
@@ -16,7 +20,7 @@ public interface WebCrawlerService {
 
 	Output getOutputValues(Map<String, List<String>> input);
 
-	String formJSON(Output output);
+	String formJSON(Output output, File f) throws WebCrawlerException;
 
 	Internet readObjectFromJSON(File f) throws WebCrawlerException;
 

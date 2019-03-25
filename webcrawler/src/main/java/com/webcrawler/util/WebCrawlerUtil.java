@@ -7,11 +7,15 @@ import java.util.Properties;
 
 import com.webcrawler.exception.WebCrawlerException;
 
+/**
+ * @author Soumik.Roy
+ *
+ */
 public class WebCrawlerUtil {
 
 	private final static String PROPERTIES_FILE = "conf.properties";
 	
-	public static String getProperties(String key) {
+	public static String getProperties(String key) throws WebCrawlerException {
 
 		return new WebCrawlerUtil().readKey(PROPERTIES_FILE, key);
 	}

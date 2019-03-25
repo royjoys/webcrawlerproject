@@ -19,6 +19,10 @@ import com.webcrawler.model.Output;
 import com.webcrawler.model.Page;
 import com.webcrawler.service.WebCrawlerService;
 
+/**
+ * @author Soumik.Roy
+ *
+ */
 public class WebCrawlerServiceImpl implements WebCrawlerService {
 
 	private ObjectMapper mapper = null;
@@ -34,11 +38,11 @@ public class WebCrawlerServiceImpl implements WebCrawlerService {
 		try {
 			internet = mapper.readValue(f, Internet.class);
 		} catch (JsonParseException e) {
-			throw new WebCrawlerException("Parsing of JSON Failed");
+			throw new WebCrawlerException("Parsing of JSON Failed for "+f.getName()+"==>"+e.getMessage());
 		} catch (JsonMappingException e) {
-			throw new WebCrawlerException("Mapping of JSON Failed");
+			throw new WebCrawlerException("Mapping of JSON Failed for "+f.getName()+"==>"+e.getMessage());
 		} catch (IOException e) {
-			throw new WebCrawlerException("IOException");
+			throw new WebCrawlerException("IOException for "+f.getName()+"==>"+e.getMessage());
 		}
 		return internet;
 
@@ -61,14 +65,14 @@ public class WebCrawlerServiceImpl implements WebCrawlerService {
 	}
 
 	@Override
-	public String formJSON(Output output) {
+	public String formJSON(Output output, File f) throws WebCrawlerException {
 		String jsonFormattedString = "";
 		mapper = new ObjectMapper();
 		try {
 			jsonFormattedString = mapper.writerWithDefaultPrettyPrinter()
 					.writeValueAsString(output);
 		} catch (JsonProcessingException e) {
-			throw new WebCrawlerException("Mapping of JSON Failed");
+			throw new WebCrawlerException("Mapping of JSON Failed for "+f.getName()+"==>"+e.getMessage());
 		}
 		return jsonFormattedString;
 	}
@@ -79,6 +83,11 @@ public class WebCrawlerServiceImpl implements WebCrawlerService {
 		error = new LinkedHashSet<String>();
 	}
 
+	/**
+	 * @param url
+	 * recursively calls the method to 
+	 * populate success 
+	 */
 	private void crawl(String url) {
 		if (collect.keySet().contains(url)) {
 			if (success.add(url)) {

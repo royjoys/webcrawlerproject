@@ -1,0 +1,29 @@
+{
+  "pages":[
+    {
+      "address":"http://foo.bar.com/p1",
+      "links":[
+        "http://foo.bar.com/p2",
+        "http://foo.bar.com/p3",
+        "http://foo.bar.com/p4"
+      ]
+    },
+    {
+      "address":"http://foo.bar.com/p90",
+      "links":[
+        "http://foo.bar.com/p2",
+        "http://foo.bar.com/p4"
+      ]
+    },
+    {
+      "address":"http://foo.bar.com/p4",
+      "links":[
+        "http://foo.bar.com/p5"
+       ]
+    },
+    {
+      "address":"http://foo.bar.com/p5",
+      "links":[]
+    }
+  ]
+}

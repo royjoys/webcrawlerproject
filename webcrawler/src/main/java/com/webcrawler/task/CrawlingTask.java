@@ -21,16 +21,27 @@ public class CrawlingTask implements Callable<String> {
 	}
 
 	public String call() throws Exception {
-		Internet internet = service.readObjectFromJSON(file);
-		process(file, internet.getPages());
+		try{
+			Internet internet = service.readObjectFromJSON(file);
+			process(file, internet.getPages());
+		} catch(WebCrawlerException e ){
+			System.out.println(e.getMessage());
+			throw new WebCrawlerException(e.getMessage());
+		}
 		return "Success";
 	}
 
-	private void process(File f, List<Page> pages) {
+	private void process(File f, List<Page> pages) throws WebCrawlerException {
 		try {
-			String jsonInString = service.formJSON(service
-					.getOutputValues(service.formMapFromList(pages)));
+			String jsonInString ="";
+			if(pages.size() > 0){
+				 jsonInString = service.formJSON(service
+						.getOutputValues(service.formMapFromList(pages)),f);
 
+			} else {
+				jsonInString = "empty";
+			}
+			
 			System.out.println("The output for " + f.getName() + " is \n"
 					+ jsonInString);
 		} catch (WebCrawlerException e) {
